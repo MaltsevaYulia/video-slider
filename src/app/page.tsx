@@ -17,7 +17,7 @@ export interface ISlide {
 export default function Home() {
   const [videos, setVideos] = useState<ISlide[]>([]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSlideId, setSelectedSlideId] = useState<string | null>(null);
 
@@ -45,10 +45,6 @@ export default function Home() {
     fetchVideos();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   const openModal = (id: string): void => {
     setIsModalOpen(true);
     setSelectedSlideId(id);
@@ -60,12 +56,18 @@ export default function Home() {
 
   const currentSlide = videos.find(({ id }) => id === selectedSlideId);
 
+  
   return (
     <main className="flex min-h-screen flex-col items-center  p-10">
       <h1 className="uppercase font-bold text-white text-3xl lg:text-5xl mb-20">
         Video Slider
       </h1>
-      <ImgSlider openModal={openModal} videos={videos} />
+
+      {loading ? (
+        <div className="text-white ">Loading...</div>
+      ) : (
+        <ImgSlider openModal={openModal} videos={videos} />
+      )}
       {isModalOpen && (
         <Modal close={closeModal}>
           <VideoPlayer link={currentSlide?.link} />

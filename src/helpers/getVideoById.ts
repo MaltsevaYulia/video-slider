@@ -6,7 +6,7 @@ const getVideoById = async (videoId: string): Promise<ISlide> => {
   try {
     const response = await axios({
       method: "get",
-           url: `https://v1.nocodeapi.com/julia_m/vimeo/SibqMaVjcSwNyXCt/videoInfo?video_id=${videoId}`,
+      url: `https://v1.nocodeapi.com/slider/vimeo/tBoeDsbXqXFxmMem/videoInfo?video_id=${videoId}`,
       params: {},
     });
 
