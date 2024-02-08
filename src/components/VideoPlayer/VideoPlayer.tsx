@@ -13,7 +13,7 @@ const VideoPlayer = ({ link }: { link: string | undefined }) => {
           allow="autoplay"
         ></iframe>
       ) : (
-        <div>Cann't get the video</div>
+        <div>Can not get the video</div>
       )}
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
 
@@ -9,16 +9,20 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ children, close }) => {
   
-  const closeModal = ({ target, currentTarget, code }: KeyboardEvent) => {
-    if (target === currentTarget || code === "Escape") {
-      close();
-    }
-  };
+  const closeModal = useCallback(
+    ({ target, currentTarget, code }: KeyboardEvent) => {
+      if (target === currentTarget || code === "Escape") {
+        close();
+      }
+    },
+    [close]
+  );
+  
 
   useEffect(() => {
     document.addEventListener("keydown", closeModal);
     return () => document.removeEventListener("keydown", closeModal);
-  }, []);
+  }, [closeModal]);
 
   if (typeof window === "undefined") return null; 
 
